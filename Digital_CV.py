@@ -10,7 +10,8 @@ INFO_GEN = st.secrets.general
 # --GENERAL SETTINGS ---
 SOCIAL_MEDIA = {
     "LinkedIn" : "https://www.linkedin.com/in/saputraafryan/",
-    "GitHub" : "https://github.com/SaputraAfryan/"
+    "GitHub" : "https://github.com/SaputraAfryan/",
+    "Streamlit" : "https://digital-cv-afryan.streamlit.app/",
 }
 
 PROJECTS = {
