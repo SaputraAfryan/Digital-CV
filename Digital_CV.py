@@ -104,7 +104,7 @@ with st.sidebar:
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="#work-experience" target="_self" class="sidebar-link">
+                            <a href="#workexperience" target="_self" class="sidebar-link">
                                 Work Experience
                             </a>
                         </button>
@@ -183,11 +183,11 @@ with st.container():
 # --- WORK EXPERIENCES ---
 with st.container():
     st.write("#")
-    st.write("<h1 id='work-experience'>Work Experience</h1>", unsafe_allow_html=True)
+    st.write("<h1 id='workexperience'>Work Experience</h1>", unsafe_allow_html=True)
     col_text("**Mobile Application Developer**, UPTD PSDA WS Cisadea-Cibareno, Indonesia | Internship", "07/2022 - 09/2022")
     st.write('''
 - Utilized Python scripting to efficiently organize and process employee data, resulting in a `22%` reduction in data processing time
-- Designed and implemented an `SQL` `database system` to store employee information, improving data accessibility and retrieval by `43%`.
+- Designed and implemented an `SQL` database system to store employee information, improving data accessibility and retrieval by `43%`.
 - Created visually appealing Employee of the Month displays using `Canva`, contributing to a `17%` increase in employee morale and engagement.
 - Successfully coordinated projects involving `Python`, `MySQL`, `Canva`, and `Flutter`, demonstrating proficiency in integrating technologies for a seamless workflow.
 ''')
