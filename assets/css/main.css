@@ -34,9 +34,9 @@ hr {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px;/* Adjust the padding as needed */
-    background-color: transparent; /* Button background color */
-    border: none; /* Remove button border */
+    padding: 10px;
+    background-color: transparent;
+    border: none;
 }
 
 .sidebar-link:hover {
