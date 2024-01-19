@@ -84,34 +84,34 @@ with st.sidebar:
                 <ul style="list-style-type:none;">
                     <li>
                         <button class="sidebar-button">
-                            <a href="/#muhammad-afryan-saputra" target="_self" class="sidebar-link">
+                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#muhammad-afryan-saputra" target="_self" class="sidebar-link">
                                 Personal Information</a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="/#summary" target="_self" class="sidebar-link">
+                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#summary" target="_self" class="sidebar-link">
                                 Summary
                             </a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="/#education" target="_self" class="sidebar-link">
+                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#education" target="_self" class="sidebar-link">
                                 Education
                             </a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="/#work-experience" target="_self" class="sidebar-link">
+                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#work-experience" target="_self" class="sidebar-link">
                                 Work Experience
                             </a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="/#skills" target="_self" class="sidebar-link">
+                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#skills" target="_self" class="sidebar-link">
                                 Skills
                             </a>
                         </button>
