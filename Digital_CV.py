@@ -84,13 +84,13 @@ with st.sidebar:
                 <ul style="list-style-type:none;">
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#muhammad-afryan-saputra" target="_self" class="sidebar-link">
+                            <a href="#summary" target="_self" class="sidebar-link">
                                 Personal Information</a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#summary" target="_self" class="sidebar-link">
+                            <a href="#summary" target="_self" class="sidebar-link">
                                 Summary
                             </a>
                         </button>
@@ -143,9 +143,9 @@ for i, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
 # --- SUMMARY ---
 with st.container():
     st.write("---")
-    st.write("# **Summary**")
+    st.markdown("<h1 id='summary'>Summary</h1>", unsafe_allow_html=True)
     st.write('''
-    Bachelor's degree in Informatics Engineering at Telkom University with a Data Science concentration and 240+ hours of internship experience at UPTD PSDA WS Cisadea-Cibareno, 500+ hours working on projects in data science and data analysis throughout 2023.
+    Bachelor's degree in Informatics Engineering at Telkom University with a Data Science concentration and `240+` hours of internship experience at UPTD PSDA WS Cisadea-Cibareno, `500+` hours working on projects in data science and data analysis throughout 2023.
 ''')
 
 def col_text(a, b):
