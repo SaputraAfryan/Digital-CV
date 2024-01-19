@@ -97,7 +97,7 @@ with st.sidebar:
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#education" target="_self" class="sidebar-link">
+                            <a href="# **Education**" target="_self" class="sidebar-link">
                                 Education
                             </a>
                         </button>
