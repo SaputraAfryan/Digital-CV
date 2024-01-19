@@ -84,7 +84,7 @@ with st.sidebar:
                 <ul style="list-style-type:none;">
                     <li>
                         <button class="sidebar-button">
-                            <a href="#summary" target="_self" class="sidebar-link">
+                            <a href="#top" target="_self" class="sidebar-link">
                                 Personal Information</a>
                         </button>
                     </li>
@@ -97,21 +97,21 @@ with st.sidebar:
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#education" target="_self" class="sidebar-link">
+                            <a href="#education" target="_self" class="sidebar-link">
                                 Education
                             </a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#work-experience" target="_self" class="sidebar-link">
+                            <a href="#work-experience" target="_self" class="sidebar-link">
                                 Work Experience
                             </a>
                         </button>
                     </li>
                     <li>
                         <button class="sidebar-button">
-                            <a href="https://digital-cv-afryan.streamlit.app/~/+/#skills" target="_self" class="sidebar-link">
+                            <a href="#skills" target="_self" class="sidebar-link">
                                 Skills
                             </a>
                         </button>
@@ -121,6 +121,7 @@ with st.sidebar:
     , unsafe_allow_html=True)
 
 # --- MAIN PAGE ---
+<a id="top"></a>
 col1, col2 = st.columns([1, 2])
 with st.container():
     with col1:
@@ -169,7 +170,7 @@ def s_cols(x: dict):
 # --- EDUCATION ---
 with st.container():
     st.write("#")
-    st.write("# **Education**")
+    st.markdown("<h1 id='education'>Education</h1>", unsafe_allow_html=True)
     col_text("**Bachelor of Informatics Engineering** (Informatics Engineering), *Telkom University*, Indonesia", "2019-2023")
     st.write('''
     - GPA: `3.04`
@@ -182,7 +183,7 @@ with st.container():
 # --- WORK EXPERIENCES ---
 with st.container():
     st.write("#")
-    st.write("# **Work Experience**")
+    st.write("<h1 id='work-experience'>Work Experience</h1>", unsafe_allow_html=True)
     col_text("**Mobile Application Developer**, UPTD PSDA WS Cisadea-Cibareno, Indonesia | Internship", "07/2022 - 09/2022")
     st.write('''
 - Utilized Python scripting to efficiently organize and process employee data, resulting in a 22% reduction in data processing time
@@ -200,7 +201,7 @@ with st.container():
      
 # --- SKILLS ---
     st.write("#")
-    st.write("# **Skills**")
+    st.markdown("<h1 id='skills'>Skills</h1>", unsafe_allow_html=True)
     s_cols(SKILLS)
 
 
