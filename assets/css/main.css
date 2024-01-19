@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    font-family: 'PT Serif';
+}
+
+a {
+    text-decoration: none;
+    color: black !important;
+}
+
+a.center:hover {
+    color: #00c0ff !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 5%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-button {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;/* Adjust the padding as needed */
+    background-color: transparent; /* Button background color */
+    border: none; /* Remove button border */
+}
+
+.sidebar-link:hover {
+    color: #00c0ff !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'PT Serif';
+}
+
+p.author {
+    margin-bottom: 2px;
+}
