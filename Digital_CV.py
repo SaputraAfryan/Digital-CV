@@ -121,7 +121,7 @@ with st.sidebar:
     , unsafe_allow_html=True)
 
 # --- MAIN PAGE ---
-<a id="top"></a>
+st.markdown("<a id='top'></a>", unsafe_allow_html=True)
 col1, col2 = st.columns([1, 2])
 with st.container():
     with col1:
@@ -186,16 +186,16 @@ with st.container():
     st.write("<h1 id='work-experience'>Work Experience</h1>", unsafe_allow_html=True)
     col_text("**Mobile Application Developer**, UPTD PSDA WS Cisadea-Cibareno, Indonesia | Internship", "07/2022 - 09/2022")
     st.write('''
-- Utilized Python scripting to efficiently organize and process employee data, resulting in a 22% reduction in data processing time
-- Designed and implemented an SQL database system to store employee information, improving data accessibility and retrieval by 43%.
-- Created visually appealing Employee of the Month displays using Canva, contributing to a 17% increase in employee morale and engagement.
-- Successfully coordinated projects involving Python, MySQL, Canva, and Flutter, demonstrating proficiency in integrating technologies for a seamless workflow.
+- Utilized Python scripting to efficiently organize and process employee data, resulting in a `22%` reduction in data processing time
+- Designed and implemented an `SQL` `database system` to store employee information, improving data accessibility and retrieval by `43%`.
+- Created visually appealing Employee of the Month displays using `Canva`, contributing to a `17%` increase in employee morale and engagement.
+- Successfully coordinated projects involving `Python`, `MySQL`, `Canva`, and `Flutter`, demonstrating proficiency in integrating technologies for a seamless workflow.
 ''')
     col_text("**Assistant Lecturer**, Telkom University, Indonesia", "09/2020 - 03/2021")
     st.write('''
-- Conducted regular assessments, resulting in a 35% decrease in students struggling with foundational programming principles.
-- Achieved a 15% increase in the number of students completing advanced programming projects successfully.
-- Implemented a training session support system resulting in a 30% decrease in lecturer workload.
+- Conducted regular assessments, resulting in a `35%` decrease in students struggling with foundational programming principles.
+- Achieved a `15%` increase in the number of students completing advanced programming projects successfully.
+- Implemented a training session support system resulting in a `30%` decrease in lecturer workload.
 ''')
 
      
