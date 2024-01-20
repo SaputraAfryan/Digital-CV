@@ -4,6 +4,7 @@ from PIL import Image
 # --- PATH_SETTINGS ---
 PATH_CSS = f"{st.secrets.PATH_CONFIGURATION.path_css}/main.css"
 PATH_IMAGES = st.secrets.PATH_CONFIGURATION.path_images
+resume_file = f"{st.secrets.PATH_CONFIGURATION.path_pdf}/CV_MuhammadAfryanSaputra.pdf"
 
 INFO_GEN = st.secrets.general
 
@@ -64,6 +65,8 @@ st.set_page_config(
 # --- LOAD RESOURCE ---
 with open(PATH_CSS) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+with open(resume_file, "rb") as pdf_file:
+    PDFbyte = pdf_file.read()
 profile_pic = Image.open(f"{PATH_IMAGES}/profile-pic.png")
 
 arrow_icon = '''<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
@@ -137,6 +140,12 @@ with st.container():
         st.write(f"🎂 : **{INFO_GEN.birth}**")
         st.write(f"📧 : **{INFO_GEN.email}**")
         st.write(f"📞 : **{INFO_GEN.phone}**")
+        st.download_button(
+            label="Download CV",
+            data=PDFbyte,
+            file_name="CV_MuhammadAfryanSaputra.pdf",
+            mime="application/octet-stream"
+        )
 
 # --- SOCIAL MEDIA ---
 st.write("#")
@@ -180,7 +189,7 @@ with st.container():
     st.write('''
     - GPA: `3.04`
     - EPRT: `510`
-    - Final-Project reseach entitled: `Aspect-Based Sentiment Analysis Using Recurrent Neural Networks (RNN) on Social Media Twitter`
+    - Final-Project research entitled: `Aspect-Based Sentiment Analysis Using Recurrent Neural Networks (RNN) on Social Media Twitter`
     - Presenting Final-Project in `The 6th International Conference on Data Science and Its Applications 2023`
 ''')
     
