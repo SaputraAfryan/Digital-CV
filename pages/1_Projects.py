@@ -1,9 +1,12 @@
 import streamlit as st
 from PIL import Image
+import pandas as pd
+# import eda as eda
 
 # --- PATH_SETTINGS ---
 PATH_CSS = f"{st.secrets.PATH_CONFIGURATION.path_css}/main.css"
 PATH_IMAGES = st.secrets.PATH_CONFIGURATION.path_images
+PATH_DATASET = st.secrets.PATH_CONFIGURATION.path_dataset
 
 INFO_GEN = st.secrets.general
 
@@ -27,7 +30,13 @@ st.set_page_config(
 # --- LOAD RESOURCE ---
 with open(PATH_CSS) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
-profile_pic = Image.open(f"{PATH_IMAGES}/profile-pic.png")
+
+@st.cache_data
+def load_pict(filename):
+    img = Image.open(filename)
+    return img
+
+profile_pic = load_pict(f"{PATH_IMAGES}/profile-pic.png")
 
 # --- SIDE BAR ---
 with st.sidebar:
@@ -37,34 +46,58 @@ with st.sidebar:
     with scol2:
         st.write("## Muhammad Afryan Saputra's")
     st.write("---")
-    # st.markdown('''
-    #             <ul style="list-style-type:none;">
-    #                 <li>
-    #                     <button class="sidebar-button">
-    #                         <a href="/Projects#aspect-based-sentiment-analysis-using-recurrent-neural-networks-rnn-on-social-media-twitter" target="_self" class="sidebar-link">
-    #                             Project 1</a>
-    #                     </button>
-    #                 </li>
-    #                 <li>
-    #                     <button class="sidebar-button">
-    #                         <a href="/Projects#coming-soon" target="_self" class="sidebar-link">
-    #                             Project 2</a>
-    #                     </button>
-    #                 </li>
-    #             </ul>
-    #             '''
-    # , unsafe_allow_html=True)
+    
+# --- FUNCTION ---
+@st.cache_data
+def load_dataset(filename):
+    df = pd.read_pickle(filename)
+    return df
 
 # --- TABS ---
 tab1, tab2 = st.tabs(["Project 1", "Project 2"])
 with tab1:
     with st.container():
         st.write("#")
-        st.write("# **Aspect-Based Sentiment Analysis Using Recurrent Neural Networks (RNN) on Social Media Twitter**")
-        st.write("""Author : 
-- Muhammad Afryan Saputra 
-- Erwin Budi Setiawan""")
+        st.write("# **SentimentCine: Analisis Sentimen pada Ulasan Film menggunakan Teknologi Pemrosesan Bahasa Alami**")
+        st.write("""Author : Muhammad Afryan Saputra""")
+        st.write("---")
+        st.write("""The goal of the project is to develop SentimentCine, a system that will perform sentimental analysis on film reviews using natural language processing (NLP) technology and machine learning. 
+                 It will help producers, directors, and screenwriters understand how the audience responds to their work and provide stakeholders in the film industry with insights that can be used for strategic decision-making.""")
         
+    ### --- Dataset ---
+    with st.container():
+        df_tab1 = load_dataset(f'{PATH_DATASET}preprocessed.pkl') 
+        df_tab1 = df_tab1.filter(['judul', 'tweet', 'detokenize'])
+
+        st.write("### Datasets")
+        st.write(f"""The datasets used for the training and test data on this project are `{df_tab1.shape[0]: ,}` Indonesian language reviews with `{df_tab1['judul'].nunique():,}` different titles taken through the 'Twitter' platform.""")
+        st.dataframe(
+            df_tab1,
+            column_config={
+                "judul" : "Tittle",
+                "tweet" : "Reviews",
+                "detokenize" : "Preprocessed"
+            }, 
+            use_container_width=True,
+            hide_index=False)
+
+    ### --- Preprocessing ---
+    with st.container():
+        st.write('### Preprocessing')
+        st.write("""The techniques used in the preprocessing phase for training dataset above are:
+- Removing numbers, hashtags, mention, and special characters
+- Tokenization
+- Normalization
+- Stopwords Removal
+- Stemming
+- Lemmatization
+""")
+
+    with st.container():
+        eda_df = load_dataset(f'{PATH_DATASET}sentiment.pkl')
+        eda_df = eda_df.filter(['cleaned', 'sentiment'])
+        st.write('### Exploratory Data Analysis (EDA)')
+    
 with tab2:
     with st.container():
         st.write("#")

@@ -56,3 +56,10 @@ h2 {
 p.author {
     margin-bottom: 2px;
 }
+
+/* .centered-element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
