@@ -58,7 +58,7 @@ tab1, tab2 = st.tabs(["Project 1", "Project 2"])
 with tab1:
     with st.container():
         st.write("#")
-        st.write("# **SentimentCine: Analisis Sentimen pada Ulasan Film menggunakan Teknologi Pemrosesan Bahasa Alami**")
+        st.write("# **SentimentCine: Sentiment Analysis on Movie Reviews using Natural Language Processing (NLP) Technology**")
         st.write("""Author : Muhammad Afryan Saputra""")
         st.write("---")
         st.write("""The goal of the project is to develop SentimentCine, a system that will perform sentimental analysis on film reviews using natural language processing (NLP) technology and machine learning. 
