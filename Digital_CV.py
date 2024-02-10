@@ -66,14 +66,14 @@ st.set_page_config(
 with open(PATH_CSS) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_resume(filename):
     with open(filename, "rb") as pdf_file:
         PDFbyte = pdf_file.read()
     return PDFbyte
 PDFbyte = load_resume(resume_file)
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def load_pict(filename):
     img = Image.open(filename)
     return img

@@ -48,9 +48,14 @@ with st.sidebar:
     st.write("---")
     
 # --- FUNCTION ---
-@st.cache_data
-def load_dataset(filename):
+@st.cache_data(show_spinner=False)
+def load_pickle(filename):
     df = pd.read_pickle(filename)
+    return df
+
+@st.cache_data(show_spinner=False)
+def transform_df(data, arr :list):
+    df = data.filter(arr)
     return df
 
 # --- TABS ---
@@ -66,11 +71,11 @@ with tab1:
         
     ### --- Dataset ---
     with st.container():
-        df_tab1 = load_dataset(f'{PATH_DATASET}preprocessed.pkl') 
-        df_tab1 = df_tab1.filter(['judul', 'tweet', 'detokenize'])
+        df_tab1 = load_pickle(f'{PATH_DATASET}preprocessed.pkl') 
+        df_tab1 = transform_df(df_tab1, ['judul', 'tweet', 'detokenize'])
 
         st.write("### Datasets")
-        st.write(f"""The datasets used for the training and test data on this project are `{df_tab1.shape[0]: ,}` Indonesian language reviews with `{df_tab1['judul'].nunique():,}` different titles taken through the 'Twitter' platform.""")
+        st.write(f"""The datasets used for the training and test data on this project are `{df_tab1.shape[0]: ,}` Indonesian language reviews with `{df_tab1['judul'].nunique():,}` different titles taken through the `Twitter` platform.""")
         st.dataframe(
             df_tab1,
             column_config={
@@ -94,7 +99,7 @@ with tab1:
 """)
 
     with st.container():
-        eda_df = load_dataset(f'{PATH_DATASET}sentiment.pkl')
+        eda_df = load_pickle(f'{PATH_DATASET}sentiment.pkl')
         eda_df = eda_df.filter(['cleaned', 'sentiment'])
         st.write('### Exploratory Data Analysis (EDA)')
     
