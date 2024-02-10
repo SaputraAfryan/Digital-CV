@@ -19,28 +19,28 @@ class ExploratoryDataAnalysis:
         eda_df['unique'] = eda_df['cleaned'].swifter.apply(lambda x: len(set(' '.join(x))))
         return eda_df
 
-    def Class_plot(self):
-        plot = sns.countplot(x='sentiment', data=self.df, palette='viridis')
+    def Class_plot(self, ax):
+        plot = sns.countplot(x='sentiment', data=self.df, palette='viridis', ax=ax)
         plot = plot.set(title="Sentiment Distribution", xlabel="Sentiment", ylabel="Counts")
         return plot
 
-    def Freq_char(self):
-        plot = sns.histplot(data=self.df, x='char', bins=np.arange(0, 260, 10), hue='sentiment', kde=True, palette='hls')
+    def Freq_char(self, ax):
+        plot = sns.histplot(data=self.df, x='char', bins=np.arange(0, 260, 10), hue='sentiment', kde=True, palette='hls', ax=ax)
         plot = plot.set(title="Frequency Distribution Number of Characters per Data Based on Sentiment", xlabel="Number of Characters", ylabel="Frequency")
         return plot
     
-    def Freq_word(self):
-        plot = sns.histplot(data=self.df, x='word', bins=np.arange(0, 50), hue='sentiment', kde=True, palette='hls')
+    def Freq_word(self, ax):
+        plot = sns.histplot(data=self.df, x='word', bins=np.arange(0, 50), hue='sentiment', kde=True, palette='hls', ax=ax)
         plot = plot.set(title="Frequency Distribution Number of Words per Data Based on Sentiment", xlabel="Number of Words", ylabel="Frequency")
         return plot
     
-    def Freq_mean(self):
-        plot = sns.histplot(data=self.df, x='mean', hue='sentiment', kde=True, palette='hls')
+    def Freq_mean(self, ax):
+        plot = sns.histplot(data=self.df, x='mean', hue='sentiment', kde=True, palette='hls', ax=ax)
         plot = plot.set(title="Average Word Length Frequency Distribution Based on Sentiment", xlabel="Average Word Length", ylabel="Frequency")
         return plot
 
-    def Freq_unique(self):
-        plot = sns.histplot(data=self.df, x='unique', bins=range(self.df['unique'].min(), self.df['unique'].max() + 1), hue='sentiment', kde=True, palette='hls')
+    def Freq_unique(self, ax):
+        plot = sns.histplot(data=self.df, x='unique', bins=range(self.df['unique'].min(), self.df['unique'].max() + 1), hue='sentiment', kde=True, palette='hls', ax=ax)
         plot = plot.set(title="Frequency Distribution Number of Unique Characters Based on Sentiment", xlabel="Number of Unique Characters", ylabel="Frequency")
         return plot
 
@@ -58,4 +58,3 @@ if __name__ == "__main___":
     eda = ExploratoryDataAnalysis(data)
     
     classplot = eda.Class_plot()
-    plt.show()

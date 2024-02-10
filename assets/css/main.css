@@ -57,9 +57,20 @@ p.author {
     margin-bottom: 2px;
 }
 
-/* .centered-element {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+.eda-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.eda-column {
+    width: 48%;
+}
+
+.eda-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
