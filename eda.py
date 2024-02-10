@@ -45,7 +45,9 @@ class ExploratoryDataAnalysis:
         return plot
 
     def Freq_ngrams(self, cat_sentiment, n=3):
-        sentiment_text = [word for tweet in self.df['cleaned'] for word in tweet]
+        self.dfgrams = self.df[self.df['sentiment'] == cat_sentiment]
+
+        sentiment_text = [word for tweet in self.dfgrams['cleaned'] for word in tweet]
         ngram_text = list(ngrams(sentiment_text, n))
         fqdist = FreqDist(ngram_text)
 

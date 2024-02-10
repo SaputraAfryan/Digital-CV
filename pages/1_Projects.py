@@ -69,12 +69,18 @@ def get_fig(_func:ExploratoryDataAnalysis):
     return fig
     
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource
 def load_eda()->ExploratoryDataAnalysis:
     data = load_pickle(f'{PATH_DATASET}sentiment.pkl')
     data = transform_df(data, ['cleaned', 'sentiment'])
     eda = ExploratoryDataAnalysis(data)
     return eda
+
+@st.cache_data(show_spinner=False)
+def plot_ngrams(_func:ExploratoryDataAnalysis, cat, n):
+    fig = plt.figure(figsize=(15,5))
+    _func.Freq_ngrams(cat, n)
+    return fig
 
 
 
@@ -123,16 +129,32 @@ with tab1:
         eda = load_eda()
         st.write('## Exploratory Data Analysis (EDA)')
 
-        eda_col1, eda_col2 = st.columns([2,1])
-        with eda_col1:            
+        _, center, __ = st.columns([0.5,1,0.5])
+        with center:            
             fig, ax = plt.subplots(1, 1, figsize=(7.5, 5))
             eda.Class_plot(ax)
             st.pyplot(fig)
-        with eda_col2:
-            st.markdown("The datasets used as training data have a linear distribution of the sentiment values.")
+            st.markdown("<p class='eda-text'>The datasets used as training data have a linear distribution of the sentiment values.</p>", unsafe_allow_html=True)
 
         with st.container():
             st.pyplot(get_fig(eda))
+            st.write("""From the above exploration can be inferred that the data has it's peak frequency at:
+- Number of Words : `11`
+- Number of Characters: `70` 
+- Number of Unique Characters: `22` 
+- Average Word Length : `5`
+""")
+        
+        with st.container():
+            sbox, slide = st.columns([0.4, 0.6])
+            with sbox:
+                sent_val = st.select_slider("Select Sentiment Values", ["Positive", "Neutral", 'Negative'])
+            with slide:
+                N = st.slider("How Many N-Grams", 1, 5)
+            st.pyplot(plot_ngrams(eda, sent_val, N))
+            st.write("""Some titles like `Kimi no Nawa` become tokens that often appear on the whole sentiment value when n-grams = `3`. 
+                     This is because the review on the dataset has three aspects of discussion, namely: `Plot`, `Actor`, and also `Director`. 
+                     While this project is intended to do sentiment analysis at document level.""")
 
     
 with tab2:
