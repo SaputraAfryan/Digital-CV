@@ -96,14 +96,13 @@ def load_vec():
     return vectorizer
 
 @st.cache_data(show_spinner=False)
-def predict():
+def predict(str):
     vec = load_vec()
     model = load_model()
     tp = TextPreparation()
-    text = tp.preprocess_text(st.session_state.review)
 
+    text = tp.preprocess_text(str)
     test = vec.transform([text])
-
     return model.predict(test)[0]
 
 
@@ -201,28 +200,19 @@ with tab1:
         st.write('#### Try This Out...')
         inp_col1, inp_col2 = st.columns([2,1])
         with inp_col1:
-            st.text_input("Reviews (Indonesian)", value="gilaaa keren bgt film conjouring, plotnya asik, penonton bakal dibuat melongo sama sinematografinya, menegangkan banget pokoknya...", 
+            def callbacks():
+                predict(st.session_state.review)
+            if 'review' not in st.session_state:
+                st.session_state.review = 'bagus banget ceritanya'
+            else:
+                pc = "Example: bagus banget ceritanya"
+                st.text_input("Reviews (Indonesian)", placeholder=pc, 
                           key='review', 
-                          on_change=predict())
+                          on_change=callbacks())
         with inp_col2:
-            
-            text = predict()
-            st.text_input("Predicted Sentiment", value=f"{text}", disabled=True)
-        df = pd.DataFrame(
-    [
-        {"reviews": "gilaaa keren bgt film conjouring, plotnya asik, penonton bakal dibuat melongo sama sinematografinya, menegangkan banget pokoknya...", "sentiment": "Positive"},
-    ]
-)
-        edited_df = st.data_editor(
-    df,
-    column_config={
-        "reviews": "Reviews (Indonesian)",
-        "sentiment": "Predicted Sentiment",
-    },
-    use_container_width=True,
-    disabled=["sentiment"],
-    hide_index=True,
-)
+            if 'pred' not in st.session_state:
+                st.session_state.pred = "Positif"
+            st.text_input("Predicted Sentiment", key="pred", value=f"{predict(st.session_state.review)}", disabled=True)
 
     
 with tab2:

@@ -2,10 +2,13 @@ import re
 import json
 import swifter
 import pandas as pd
+import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+
+nltk.download('popular', quiet=True)
 
 
 
