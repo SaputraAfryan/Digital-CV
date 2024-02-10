@@ -57,4 +57,3 @@ if __name__ == "__main___":
     data = pd.read_pickle("assets/datasets/sentiment.pkl")
     eda = ExploratoryDataAnalysis(data)
     
-    classplot = eda.Class_plot()
