@@ -69,7 +69,7 @@ def get_fig(_func:ExploratoryDataAnalysis):
     return fig
     
 
-@st.cache_resource
+@st.cache_data(show_spinner=False)
 def load_eda()->ExploratoryDataAnalysis:
     data = load_pickle(f'{PATH_DATASET}sentiment.pkl')
     data = transform_df(data, ['cleaned', 'sentiment'])
