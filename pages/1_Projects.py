@@ -204,11 +204,11 @@ with tab1:
                 predict(st.session_state.review)
             if 'review' not in st.session_state:
                 st.session_state.review = 'bagus banget ceritanya'
-            else:
-                pc = "Example: bagus banget ceritanya"
-                st.text_input("Reviews (Indonesian)", placeholder=pc, 
-                          key='review', 
-                          on_change=callbacks())
+            
+            pc = "Example: bagus banget ceritanya"
+            st.text_input("Reviews (Indonesian)", placeholder=pc, 
+                        key='review', 
+                        on_change=callbacks())
         with inp_col2:
             if 'pred' not in st.session_state:
                 st.session_state.pred = "Positif"
