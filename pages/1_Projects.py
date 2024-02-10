@@ -100,22 +100,24 @@ with tab1:
         df_tab1 = load_pickle(f'{PATH_DATASET}preprocessed.pkl') 
         df_tab1 = transform_df(df_tab1, ['judul', 'tweet', 'detokenize'])
 
+        st.write('#')
         st.write("## Datasets")
         st.write(f"""The datasets used for the training and test data on this project are `{df_tab1.shape[0]: ,}` Indonesian language reviews with `{df_tab1['judul'].nunique():,}` different titles taken through the `Twitter` platform.""")
-        st.dataframe(
-            df_tab1,
-            column_config={
-                "judul" : "Tittle",
-                "tweet" : "Reviews",
-                "detokenize" : "Preprocessed"
-            }, 
-            use_container_width=True,
-            hide_index=False)
-
-    ## --- Preprocessing ---
-    with st.container():
-        st.write('## Preprocessing')
-        st.write("""The techniques used in the preprocessing phase for training dataset above are:
+        dcol1, dcol2 = st.columns([0.65, 0.35])
+        with dcol1:
+            st.dataframe(
+                df_tab1,
+                column_config={
+                    "judul" : "Tittle",
+                    "tweet" : "Reviews",
+                    "detokenize" : "Preprocessed"
+                }, 
+                use_container_width=True,
+                hide_index=False)
+        with dcol2:
+            ## --- Preprocessing ---
+            st.write('## Preprocessing')
+            st.write("""The techniques used in the preprocessing phase for training dataset above are:
 - Removing numbers, hashtags, mention, and special characters
 - Tokenization
 - Normalization
@@ -124,9 +126,12 @@ with tab1:
 - Lemmatization
 """)
 
+
     ## --- Exploratory Data Analysis ---
     with st.container():
         eda = load_eda()
+        st.write('#')
+        st.write('---')
         st.write('## Exploratory Data Analysis (EDA)')
 
         _, center, __ = st.columns([0.5,1,0.5])
@@ -145,16 +150,46 @@ with tab1:
 - Average Word Length : `5`
 """)
         
-        with st.container():
-            sbox, slide = st.columns([0.4, 0.6])
-            with sbox:
-                sent_val = st.select_slider("Select Sentiment Values", ["Positive", "Neutral", 'Negative'])
-            with slide:
-                N = st.slider("How Many N-Grams", 1, 5)
-            st.pyplot(plot_ngrams(eda, sent_val, N))
-            st.write("""Some titles like `Kimi no Nawa` become tokens that often appear on the whole sentiment value when n-grams = `3`. 
-                     This is because the review on the dataset has three aspects of discussion, namely: `Plot`, `Actor`, and also `Director`. 
-                     While this project is intended to do sentiment analysis at document level.""")
+    ## --- N-Grams Distribution ---
+    with st.container():
+        st.write('#')
+        st.write('---')
+        st.write('## N-Grams Distribution')
+        sbox, slide = st.columns([0.4, 0.6])
+        with sbox:
+            sent_val = st.select_slider("Select Sentiment Values", ["Positive", "Neutral", 'Negative'])
+        with slide:
+            n_val = st.slider("How Many N-Grams", 1, 5)
+        st.pyplot(plot_ngrams(eda, sent_val, n_val))
+        st.write("""Some titles like `Kimi no Nawa` become tokens that often appear on the whole sentiment value when n-grams = `3`. 
+                    This is because the review on the dataset has three aspects of discussion, namely: `Plot`, `Actor`, and also `Director`. 
+                    While this project is intended to do sentiment analysis at document level.""")
+
+    ## --- Models ---
+        st.write('#')
+        st.write('---')
+        st.write('## **Models**')
+        st.write("""Support Vector Machine (SVM) is used alongside with TF-IDF because SVM has proven to be effective in handling complex and non-linear data. 
+                 This is beneficial for sentimental analysis processing because the data used is often complex and not necessarily linear. 
+                 In addition, SVM can also handle high-dimensional data and separate classes well in the space.""")
+        st.write("""TF-IDF gives weight to words based on the frequency in a document and how rarely the word appears throughout the dataset.
+                 Words that appear frequently in the document but rarely appear generally will have a higher weight.""")
+        st.write('#### Try This Out...')
+        df = pd.DataFrame(
+    [
+        {"reviews": "gilaaa keren bgt film conjouring, plotnya asik, penonton bakal dibuat melongo sama sinematografinya, menegangkan banget pokoknya...", "sentiment": "Positive"},
+    ]
+)
+        edited_df = st.data_editor(
+    df,
+    column_config={
+        "reviews": "Reviews (Indonesian)",
+        "sentiment": "Predicted Sentiment",
+    },
+    use_container_width=True,
+    disabled=["sentiment"],
+    hide_index=True,
+)
 
     
 with tab2:
