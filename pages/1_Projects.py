@@ -1,13 +1,17 @@
-import matplotlib.pyplot as plt
-import streamlit as st
-from PIL import Image
+import joblib
+from numpy import vectorize
 import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+from PIL import Image
 from eda import ExploratoryDataAnalysis
+from preprocessing import TextPreparation
 
 # --- PATH_SETTINGS ---
 PATH_CSS = f"{st.secrets.PATH_CONFIGURATION.path_css}/main.css"
 PATH_IMAGES = st.secrets.PATH_CONFIGURATION.path_images
 PATH_DATASET = st.secrets.PATH_CONFIGURATION.path_dataset
+PATH_MODEL = st.secrets.PATH_CONFIGURATION.path_model
 
 INFO_GEN = st.secrets.general
 
@@ -68,7 +72,6 @@ def get_fig(_func:ExploratoryDataAnalysis):
     _func.Freq_unique(axes[1, 1])
     return fig
     
-
 @st.cache_resource
 def load_eda()->ExploratoryDataAnalysis:
     data = load_pickle(f'{PATH_DATASET}sentiment.pkl')
@@ -81,6 +84,27 @@ def plot_ngrams(_func:ExploratoryDataAnalysis, cat, n):
     fig = plt.figure(figsize=(15,5))
     _func.Freq_ngrams(cat, n)
     return fig
+
+@st.cache_resource
+def load_model():
+    model = joblib.load(f'{PATH_MODEL}best_svm_model.joblib')
+    return model
+
+@st.cache_resource
+def load_vec():
+    vectorizer = joblib.load(f'{PATH_MODEL}tfidf_vectorizer.joblib')
+    return vectorizer
+
+@st.cache_data(show_spinner=False)
+def predict():
+    vec = load_vec()
+    model = load_model()
+    tp = TextPreparation()
+    text = tp.preprocess_text(st.session_state.review)
+
+    test = vec.transform([text])
+
+    return model.predict(test)[0]
 
 
 
@@ -175,6 +199,15 @@ with tab1:
         st.write("""TF-IDF gives weight to words based on the frequency in a document and how rarely the word appears throughout the dataset.
                  Words that appear frequently in the document but rarely appear generally will have a higher weight.""")
         st.write('#### Try This Out...')
+        inp_col1, inp_col2 = st.columns([2,1])
+        with inp_col1:
+            st.text_input("Reviews (Indonesian)", value="gilaaa keren bgt film conjouring, plotnya asik, penonton bakal dibuat melongo sama sinematografinya, menegangkan banget pokoknya...", 
+                          key='review', 
+                          on_change=predict())
+        with inp_col2:
+            
+            text = predict()
+            st.text_input("Predicted Sentiment", value=f"{text}", disabled=True)
         df = pd.DataFrame(
     [
         {"reviews": "gilaaa keren bgt film conjouring, plotnya asik, penonton bakal dibuat melongo sama sinematografinya, menegangkan banget pokoknya...", "sentiment": "Positive"},

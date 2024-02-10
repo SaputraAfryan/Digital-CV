@@ -11,7 +11,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 
 class TextPreparation():
-    def __init__(self, data:pd.DataFrame):
+    def __init__(self, data=None):
         self.data = data
         self.slang_dict = self.get_slang()
         self.stop_words = self.get_stops()
@@ -137,7 +137,7 @@ class TextPreparation():
         stop_words.update(custom_stopwords)
         return stop_words
 
-    def preprocess_text(self, text:str):
+    def preprocess_text(self, text):
         text = re.sub(r'[\n\t]|/mvs/|\s+', ' ', text) # remove multiple space, enter, tab, \n, dan \mvs\
         text = re.sub(r"#\w+|@\w+", "", text) # remove hashtag and mention
         text = re.sub(r'https?:\/\/(?:www\.)?\S+', '', text) # remove URLs
@@ -157,9 +157,10 @@ class TextPreparation():
 
         return joined_text
     
-    def preprocess_df(self, cols):
-        self.data['reviews'] = self.data['reviews'].swifter.apply(self.preprocess_text)
-        return self.data
+    def preprocess_df(self):
+        if self.data:
+            self.data['reviews'] = self.data['reviews'].swifter.apply(self.preprocess_text)
+            return self.data
 
 if __name__ == "__main__":
     pass
